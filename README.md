@@ -2,6 +2,12 @@
 
 https://www.youtube.com/watch?v=y52Av3JxNW4 크롱님 영상 참조
 
+## 현재까지 진행상황
+
+![image](https://user-images.githubusercontent.com/14370441/136837597-7ef29c98-3244-4d4f-adcc-da00c18d4b03.png)
+
+---
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
