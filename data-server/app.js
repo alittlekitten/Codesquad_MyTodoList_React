@@ -22,6 +22,10 @@ app.use(cors());
 app.options("*", cors());
 
 app.get("/", (req, res) => res.send("Hello World!"));
-app.get("/todo", (req, res) => res.json(todos));
+app.get("/todo", (req, res) => {
+    setTimeout(() => {
+        return res.json(todos);
+    }, 1000);
+});
 
 app.listen(port, () => console.log(`Example app listening on port ${port}!`));
