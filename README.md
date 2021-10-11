@@ -4,6 +4,17 @@ https://www.youtube.com/watch?v=y52Av3JxNW4 크롱님 영상 참조
 
 ## 현재까지 진행상황
 
+- 이벤트 처리
+- 로딩 구현
+- 서버로부터 데이터를 받아오는 부분 구현
+- 새로운 데이터를 state를 이용해서 관리하는 부분 구현
+
+### 영상
+
+![Honeycam 2021-10-12 03-34-33](https://user-images.githubusercontent.com/14370441/136838027-ec309c8f-4dc2-400c-bbd8-1d275bc0dcde.gif)
+
+### 이미지
+
 ![image](https://user-images.githubusercontent.com/14370441/136837597-7ef29c98-3244-4d4f-adcc-da00c18d4b03.png)
 
 ---
