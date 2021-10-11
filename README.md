@@ -1,3 +1,7 @@
+# React Hook 이해 영상을 보고 투두리스트 따라만들기
+
+https://www.youtube.com/watch?v=y52Av3JxNW4 크롱님 영상 참조
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
