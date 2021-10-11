@@ -2,6 +2,30 @@ import React, { Component, useState, useEffect } from 'react'; // 라이프사�
 import './App.css';
 import List from './List.jsx';
 
+// Fetch부분을 재사용하기 위해서 별도로 분리
+// custom hook을 use로 시작하도록 만들면 이렇게 같이 라이프사이클을 태우면서 재사용 가능한 로직을 만들 수 있다!
+const useFetch = (callback, url) => {
+
+  const [loading, setLoading] = useState(false); // 로딩 구현
+
+  const fetchInitialData = async () => {
+    setLoading(true); // 처음 데이터를 가져온다 - 로딩 시작
+    const response = await fetch(url);
+    const initialData = await response.json();
+    callback(initialData); // initial state값을 그대로 넣어주면 될 것
+    setLoading(false); // 데이터를 다 가져왔따 - 로딩 끝
+  }
+
+  // 투두리스트 가져오기 
+  // 비동기 작업을 fetching할 때 useEffect 안에 직접 넣지 말고 그걸 처리하는 함수를 가져와라가 공식 가이드에 나와있다
+  useEffect( () => {
+    fetchInitialData();
+  }, []) // 빈 배열을 넣어주면 아무것도 업데이트 관찰을 하지 않는다 (처음 한번만 실행되고 그 다음에는 관찰해야할 항목이 없기 때문에 더이상 실행되지 않는다)
+
+  return loading;
+
+}
+
 const App = () => {
   // useState : state를 컴포넌트 내에서 관리하는 것
   // useEffect : ComponentDidMount나 ComponentDidUpdate같은 것들이 라이프사이클 단계에서 렌더링 이후에 일어나는 것들을 useEffect에 넣어서
@@ -16,7 +40,9 @@ const App = () => {
 
   const [todos, setTodos] = useState([]); // 앞은 상태, 뒤는 메소드 반환 https://ko.reactjs.org/docs/hooks-state.html 참조, todos가 바뀌면 자동으로 다시 렌더링
   const [newTodo, setNewTodo] = useState(); // 새로운 요소 삽입
-  const [loading, setLoading] = useState(false); // 로딩 구현
+
+  const loading = useFetch(setTodos, 'http://localhost:8080/todo'); // 내용들을 분리해서 넣어줌
+  
 
   const changeInputData = (e) =>{
       setNewTodo(e.target.value); // 새로운 정보를 newTodo에 넣게 되는 것!
@@ -24,26 +50,16 @@ const App = () => {
     
   const addTodo = (e) => {
     e.preventDefault();
-    setTodos([...todos, newTodo]);
+    setTodos([...todos, {'title': newTodo, 'id': todos.length, 'status': 'todo'}]);
   }
 
-  const fetchInitialData = async () => {
-    setLoading(true); // 처음 데이터를 가져온다 - 로딩 시작
-    const response = await fetch('http://localhost:8080/todo');
-    const initialData = await response.json();
-    setTodos(initialData); // initial state값을 그대로 넣어주면 될 것
-    setLoading(false); // 데이터를 다 가져왔따 - 로딩 끝
-  }
+  
 
   useEffect( () => {
     console.log("새로운 내용이 렌더링됐네요", todos);
   }, [todos]) // 새로운 내용이 추가가 됐다는 것을 콜백함수로 추가시켜주고싶으면 todos의 변경을 지켜보면 된다!
 
-  // 투두리스트 가져오기 
-  // 비동기 작업을 fetching할 때 useEffect 안에 직접 넣지 말고 그걸 처리하는 함수를 가져와라가 공식 가이드에 나와있다
-  useEffect( () => {
-    fetchInitialData();
-  }, []) // 빈 배열을 넣어주면 아무것도 업데이트 관찰을 하지 않는다 (처음 한번만 실행되고 그 다음에는 관찰해야할 항목이 없기 때문에 더이상 실행되지 않는다)
+
   
 
   return (
