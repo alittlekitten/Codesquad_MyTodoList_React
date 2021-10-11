@@ -6,15 +6,15 @@ const port = 8080;
 const todos = [
   {
     id: 1233,
-    title: "React Hooks 익히기"
+    title: "리액트 익히기"
   },
   {
     id: 1234,
-    title: "GraphQL 익히기"
+    title: "롤 다이아 찍기"
   },
   {
     id: 1230,
-    title: "Apollo 익히기"
+    title: "부캠 출석체크 하기"
   }
 ];
 

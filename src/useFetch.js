@@ -2,6 +2,8 @@ import { useState, useEffect } from 'react'; // 라이프사이클 이후에 추
 
 // Fetch부분을 재사용하기 위해서 별도로 분리
 // custom hook을 use로 시작하도록 만들면 이렇게 같이 라이프사이클을 태우면서 재사용 가능한 로직을 만들 수 있다!
+// 별도의 custom hook!!!
+// https://ko.reactjs.org/docs/hooks-custom.html 참조
 const useFetch = (callback, url) => {
 
     const [loading, setLoading] = useState(false); // 로딩 구현

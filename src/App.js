@@ -3,8 +3,6 @@ import './App.css';
 import List from './List.jsx';
 import useFetch from './useFetch.js';
 
-
-
 const App = () => {
   // useState : state를 컴포넌트 내에서 관리하는 것
   // useEffect : ComponentDidMount나 ComponentDidUpdate같은 것들이 라이프사이클 단계에서 렌더링 이후에 일어나는 것들을 useEffect에 넣어서
@@ -32,14 +30,9 @@ const App = () => {
     setTodos([...todos, {'title': newTodo, 'id': todos.length, 'status': 'todo'}]);
   }
 
-  
-
   useEffect( () => {
     console.log("새로운 내용이 렌더링됐네요", todos);
   }, [todos]) // 새로운 내용이 추가가 됐다는 것을 콜백함수로 추가시켜주고싶으면 todos의 변경을 지켜보면 된다!
-
-
-  
 
   return (
     <>
