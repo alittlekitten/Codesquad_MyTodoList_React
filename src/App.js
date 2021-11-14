@@ -1,7 +1,8 @@
-import React, { Component, useState, useEffect } from 'react'; // 라이프사이클 이후에 추가할 수 있는 것이 useEffect
-import './App.css';
-import List from './List.jsx';
-import useFetch from './useFetch.js';
+import React, { Component, useState, useEffect } from "react"; // 라이프사이클 이후에 추가할 수 있는 것이 useEffect
+import "./App.css";
+import List from "./List.jsx";
+import useFetch from "./useFetch.js";
+import Header from "./Header.jsx";
 
 const App = () => {
   // useState : state를 컴포넌트 내에서 관리하는 것
@@ -18,34 +19,51 @@ const App = () => {
   const [todos, setTodos] = useState([]); // 앞은 상태, 뒤는 메소드 반환 https://ko.reactjs.org/docs/hooks-state.html 참조, todos가 바뀌면 자동으로 다시 렌더링
   const [newTodo, setNewTodo] = useState(); // 새로운 요소 삽입
 
-  const loading = useFetch(setTodos, 'http://localhost:8080/todo'); // 내용들을 분리해서 넣어줌
-  
+  const loading = useFetch(setTodos, "http://localhost:8080/todo"); // 내용들을 분리해서 넣어줌
 
-  const changeInputData = (e) =>{
-      setNewTodo(e.target.value); // 새로운 정보를 newTodo에 넣게 되는 것!
-  }
-    
+  const changeInputData = (e) => {
+    setNewTodo(e.target.value); // 새로운 정보를 newTodo에 넣게 되는 것!
+  };
+
   const addTodo = (e) => {
     e.preventDefault();
-    setTodos([...todos, {'title': newTodo, 'id': todos.length, 'status': 'todo'}]);
-  }
+    setTodos([...todos, { title: newTodo, id: todos.length, status: "todo" }]);
+  };
 
-  useEffect( () => {
+  // 상태를 바꿔주는 부분
+  const changeTodoStatus = (id) => {
+    const updateTodos = todos.map((todo) => {
+      if (todo.id === +id) {
+        if (todo.status === "done") todo.status = "todo";
+        else todo.status = "done";
+      }
+      return todo;
+    });
+
+    setTodos(updateTodos);
+  };
+
+  useEffect(() => {
     console.log("새로운 내용이 렌더링됐네요", todos);
-  }, [todos]) // 새로운 내용이 추가가 됐다는 것을 콜백함수로 추가시켜주고싶으면 todos의 변경을 지켜보면 된다!
+  }, [todos]); // 새로운 내용이 추가가 됐다는 것을 콜백함수로 추가시켜주고싶으면 todos의 변경을 지켜보면 된다!
 
   return (
     <>
-    <h1>todo 애플리케이션</h1>
-    <form action = "">
-      <input type="text" name="" onChange={changeInputData}/>
-      <button onClick={addTodo}>할일추가</button>
-    </form>
-
-    <List todos={todos} loading={loading}/>  {/* todos가 상태값을 가지고 있는 정보 */}
-    
+      <h1>todo 애플리케이션</h1>
+      <Header todos={todos} />
+      <form action="">
+        <input type="text" name="" onChange={changeInputData} />
+        <button onClick={addTodo}>할일추가</button>
+      </form>
+      <List
+        todos={todos}
+        loading={loading}
+        changeTodoStatus={changeTodoStatus}
+      />
+      {/* todos가 상태값을 가지고 있는 정보 */}
+      {/* 만약 todos가 List 내에서 변경되면? Header에서도 그 내용이 반영되어야 한다 - 상태관리의 필요성!!! */}
     </>
-  )
-}
+  );
+};
 
 export default App;
