@@ -1,4 +1,4 @@
-import React, { Component, useState, useEffect } from "react"; // 라이프사이클 이후에 추가할 수 있는 것이 useEffect
+import React, { Component, useState, useEffect, useReducer } from "react"; // 라이프사이클 이후에 추가할 수 있는 것이 useEffect
 import "./App.css";
 import List from "./List.jsx";
 import useFetch from "./useFetch.js";
@@ -19,17 +19,12 @@ const TodoStore = () => {
   // newTodo: 새로운 정보를 담은 요소
   // setNewTodo: 새로운 정보를 newTodo에 담기 위한 메서드
 
-  const [todos, setTodos] = useState([]); // 앞은 상태, 뒤는 메소드 반환 https://ko.reactjs.org/docs/hooks-state.html 참조, todos가 바뀌면 자동으로 다시 렌더링
-  const [newTodo, setNewTodo] = useState(); // 새로운 요소 삽입
+  // const [todos, setTodos] = useState([]); // 앞은 상태, 뒤는 메소드 반환 https://ko.reactjs.org/docs/hooks-state.html 참조, todos가 바뀌면 자동으로 다시 렌더링
+  // const [newTodo, setNewTodo] = useState();
 
   const loading = useFetch(setTodos, "http://localhost:8080/todo"); // 내용들을 분리해서 넣어줌
 
-  const changeInputData = (e) => {
-    setNewTodo(e.target.value); // 새로운 정보를 newTodo에 넣게 되는 것!
-  };
-
-  const addTodo = (e) => {
-    e.preventDefault();
+  const addTodo = (newTodo) => {
     setTodos([...todos, { title: newTodo, id: todos.length, status: "todo" }]);
   };
 
@@ -53,12 +48,10 @@ const TodoStore = () => {
   return (
     <>
       <TodoContext.Provider
-        value={{ todos, addTodo, changeInputData, loading, changeTodoStatus }}
+        value={{ todos, addTodo, loading, changeTodoStatus }}
       >
         <Header />
-
         <Form />
-
         <List />
       </TodoContext.Provider>
       {/* todos가 상태값을 가지고 있는 정보 */}
