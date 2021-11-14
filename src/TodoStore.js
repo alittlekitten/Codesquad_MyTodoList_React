@@ -3,8 +3,11 @@ import "./App.css";
 import List from "./List.jsx";
 import useFetch from "./useFetch.js";
 import Header from "./Header.jsx";
+import Form from "./Form.jsx";
 
-const App = () => {
+export const TodoContext = React.createContext();
+
+const TodoStore = () => {
   // useState : state를 컴포넌트 내에서 관리하는 것
   // useEffect : ComponentDidMount나 ComponentDidUpdate같은 것들이 라이프사이클 단계에서 렌더링 이후에 일어나는 것들을 useEffect에 넣어서
   //             이 안에서 쉽게 렌더링 이후 사이드이펙트 관련 처리들(log, 서버데이터보내기) 등 후속처리 내용을 담을 수 있다
@@ -49,21 +52,19 @@ const App = () => {
 
   return (
     <>
-      <h1>todo 애플리케이션</h1>
-      <Header todos={todos} />
-      <form action="">
-        <input type="text" name="" onChange={changeInputData} />
-        <button onClick={addTodo}>할일추가</button>
-      </form>
-      <List
-        todos={todos}
-        loading={loading}
-        changeTodoStatus={changeTodoStatus}
-      />
+      <TodoContext.Provider
+        value={{ todos, addTodo, changeInputData, loading, changeTodoStatus }}
+      >
+        <Header />
+
+        <Form />
+
+        <List />
+      </TodoContext.Provider>
       {/* todos가 상태값을 가지고 있는 정보 */}
       {/* 만약 todos가 List 내에서 변경되면? Header에서도 그 내용이 반영되어야 한다 - 상태관리의 필요성!!! */}
     </>
   );
 };
 
-export default App;
+export default TodoStore;

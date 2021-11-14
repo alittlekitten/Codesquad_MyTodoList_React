@@ -6,16 +6,19 @@ const port = 8080;
 const todos = [
   {
     id: 1233,
-    title: "리액트 익히기"
+    title: "리액트 익히기",
+    status: "todo",
   },
   {
     id: 1234,
-    title: "롤 다이아 찍기"
+    title: "롤 다이아 찍기",
+    status: "todo",
   },
   {
     id: 1230,
-    title: "부캠 출석체크 하기"
-  }
+    title: "부캠 출석체크 하기",
+    status: "todo",
+  },
 ];
 
 app.use(cors());
@@ -23,9 +26,9 @@ app.options("*", cors());
 
 app.get("/", (req, res) => res.send("Hello World!"));
 app.get("/todo", (req, res) => {
-    setTimeout(() => {
-        return res.json(todos);
-    }, 1000);
+  setTimeout(() => {
+    return res.json(todos);
+  }, 1000);
 });
 
 app.listen(port, () => console.log(`Example app listening on port ${port}!`));
