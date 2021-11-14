@@ -1,6 +1,6 @@
 #  📚 React Hook 이해 영상을 보고 투두리스트 따라만들기
 
-- Codesquad에서 프론트엔드 분야를 담당하시는 크롱님의 영상을 참조했습니다.
+- `Codesquad`에서 프론트엔드 분야를 담당하시는 `Crong`님의 영상을 참조했습니다.
 - https://www.youtube.com/watch?v=y52Av3JxNW4 
 
 ## ⚔ 기술스택
@@ -13,12 +13,11 @@
 
 ## 📈 현재까지 진행상황
 
-- 이벤트 처리
-- 로딩 구현
-- 서버로부터 데이터를 받아오는 부분 구현 (커스텀 훅 사용)
-- 새로운 데이터를 state를 이용해서 관리하는 부분 구현
-- 데이터 개수를 나타내는 헤더 생성
-- 클릭하면 todo의 상태가 done으로 바뀌면서 css가 적용되도록 구현
+- `로딩` 구현
+- 서버로부터 데이터를 받아오는 부분 구현 (`커스텀 훅` 사용)
+- 새로운 데이터를 `state`를 이용해서 관리하는 부분 구현
+- 데이터 개수를 나타내는 `Header` 생성
+- 클릭하면 항목별 상태가 `todo`에서 `done`, 혹은 반대로 바뀌면서(토글) css가 적용되도록 구현
 
 ---
 
@@ -34,5 +33,5 @@
 
 ## ✏ 작동 방법
 
-- front-client : root에서 npm start를 입력합니다.
-- data-server : cd data-server를 통해 폴더에 접근한 후에 node app.js를 실행합니다.
+- front-client : root폴더에서 `npm start`를 입력합니다.
+- data-server : `cd data-server`를 통해 폴더에 접근한 후에 `node app.js`를 실행합니다.
