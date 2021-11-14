@@ -1,7 +1,7 @@
 # 📚 React Hook 이해 영상을 보고 투두리스트 따라만들기
 
 - `Codesquad`에서 프론트엔드 분야를 담당하시는 `Crong`님의 영상을 참조했습니다.
-- 21/11/15 기준 영상의 1편~6편까지 모두 완강하였습니다.
+- `21/11/15` 기준 영상의 1편 ~ 6편까지 모두 `완강`하였습니다.
 - https://www.youtube.com/watch?v=y52Av3JxNW4
 
 ## ⚔ 기술스택
@@ -28,11 +28,12 @@
 
 ## 🎥 GIF
 
-![Honeycam 2021-11-14 11-57-51](https://user-images.githubusercontent.com/14370441/141665702-879474ac-fc10-44b4-8a02-dcf130d31ebe.gif)
+![Honeycam 2021-11-15 02-28-42](https://user-images.githubusercontent.com/14370441/141691637-cf34fcbe-cf7a-42fb-8265-11a47dad95ad.gif)
+
 
 ## 📸 Image
 
-![image](https://user-images.githubusercontent.com/14370441/141665680-290cfdf3-5799-4300-9b4b-4f82c74f60f1.png)
+![image](https://user-images.githubusercontent.com/14370441/141691604-b9fce7f9-e709-4056-b27e-5ea5f538f15a.png)
 
 ---
 
