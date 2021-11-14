@@ -1,4 +1,4 @@
-import React, { Component, useState, useEffect, useReducer } from "react"; // 라이프사이클 이후에 추가할 수 있는 것이 useEffect
+import React, { useEffect, useReducer } from "react"; // 라이프사이클 이후에 추가할 수 있는 것이 useEffect
 import "./App.css";
 import List from "./List.jsx";
 import useFetch from "./useFetch.js";
@@ -6,6 +6,28 @@ import Header from "./Header.jsx";
 import Form from "./Form.jsx";
 
 export const TodoContext = React.createContext();
+
+const todoReducer = (todos, { type, payload }) => {
+  switch (type) {
+    case "ADD_TODO":
+      return [...todos, { title: payload, id: todos.length, status: "todo" }];
+
+    case "SET_INIT_DATA":
+      return payload;
+
+    case "CHANGE_TODO_STATUS":
+      return todos.map((todo) => {
+        if (todo.id === +payload) {
+          if (todo.status === "done") todo.status = "todo";
+          else todo.status = "done";
+        }
+        return todo;
+      });
+
+    default:
+      break;
+  }
+};
 
 const TodoStore = () => {
   // useState : state를 컴포넌트 내에서 관리하는 것
@@ -22,24 +44,27 @@ const TodoStore = () => {
   // const [todos, setTodos] = useState([]); // 앞은 상태, 뒤는 메소드 반환 https://ko.reactjs.org/docs/hooks-state.html 참조, todos가 바뀌면 자동으로 다시 렌더링
   // const [newTodo, setNewTodo] = useState();
 
-  const loading = useFetch(setTodos, "http://localhost:8080/todo"); // 내용들을 분리해서 넣어줌
+  const [todos, dispatch] = useReducer(todoReducer, []); // 초기값은 빈값
 
-  const addTodo = (newTodo) => {
-    setTodos([...todos, { title: newTodo, id: todos.length, status: "todo" }]);
+  const setInitData = (initData) => {
+    // 초기데이터 불러오기
+    dispatch({ type: "SET_INIT_DATA", payload: initData });
   };
 
-  // 상태를 바꿔주는 부분
-  const changeTodoStatus = (id) => {
-    const updateTodos = todos.map((todo) => {
-      if (todo.id === +id) {
-        if (todo.status === "done") todo.status = "todo";
-        else todo.status = "done";
-      }
-      return todo;
-    });
+  const loading = useFetch(setInitData, "http://localhost:8080/todo"); // 내용들을 분리해서 넣어줌
 
-    setTodos(updateTodos);
-  };
+  // // 상태를 바꿔주는 부분
+  // const changeTodoStatus = (id) => {
+  //   const updateTodos = todos.map((todo) => {
+  //     if (todo.id === +id) {
+  //       if (todo.status === "done") todo.status = "todo";
+  //       else todo.status = "done";
+  //     }
+  //     return todo;
+  //   });
+
+  //   // setTodos(updateTodos);
+  // };
 
   useEffect(() => {
     console.log("새로운 내용이 렌더링됐네요", todos);
@@ -47,9 +72,7 @@ const TodoStore = () => {
 
   return (
     <>
-      <TodoContext.Provider
-        value={{ todos, addTodo, loading, changeTodoStatus }}
-      >
+      <TodoContext.Provider value={{ todos, loading, dispatch }}>
         <Header />
         <Form />
         <List />
