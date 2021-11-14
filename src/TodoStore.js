@@ -1,35 +1,11 @@
 import React, { useEffect, useReducer } from "react"; // 라이프사이클 이후에 추가할 수 있는 것이 useEffect
 import "./App.css";
-import List from "./List.jsx";
 import useFetch from "./useFetch.js";
-import Header from "./Header.jsx";
-import Form from "./Form.jsx";
+import { todoReducer } from "./reducers.js";
 
 export const TodoContext = React.createContext();
 
-const todoReducer = (todos, { type, payload }) => {
-  switch (type) {
-    case "ADD_TODO":
-      return [...todos, { title: payload, id: todos.length, status: "todo" }];
-
-    case "SET_INIT_DATA":
-      return payload;
-
-    case "CHANGE_TODO_STATUS":
-      return todos.map((todo) => {
-        if (todo.id === +payload) {
-          if (todo.status === "done") todo.status = "todo";
-          else todo.status = "done";
-        }
-        return todo;
-      });
-
-    default:
-      break;
-  }
-};
-
-const TodoStore = () => {
+const TodoStore = (props) => {
   // useState : state를 컴포넌트 내에서 관리하는 것
   // useEffect : ComponentDidMount나 ComponentDidUpdate같은 것들이 라이프사이클 단계에서 렌더링 이후에 일어나는 것들을 useEffect에 넣어서
   //             이 안에서 쉽게 렌더링 이후 사이드이펙트 관련 처리들(log, 서버데이터보내기) 등 후속처리 내용을 담을 수 있다
@@ -73,9 +49,7 @@ const TodoStore = () => {
   return (
     <>
       <TodoContext.Provider value={{ todos, loading, dispatch }}>
-        <Header />
-        <Form />
-        <List />
+        {props.children}
       </TodoContext.Provider>
       {/* todos가 상태값을 가지고 있는 정보 */}
       {/* 만약 todos가 List 내에서 변경되면? Header에서도 그 내용이 반영되어야 한다 - 상태관리의 필요성!!! */}
