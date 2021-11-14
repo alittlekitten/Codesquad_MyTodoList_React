@@ -1,9 +1,11 @@
-#  📚 React Hook 이해 영상을 보고 투두리스트 따라만들기
+# 📚 React Hook 이해 영상을 보고 투두리스트 따라만들기
 
 - `Codesquad`에서 프론트엔드 분야를 담당하시는 `Crong`님의 영상을 참조했습니다.
-- https://www.youtube.com/watch?v=y52Av3JxNW4 
+- 21/11/15 기준 영상의 1편~6편까지 모두 완강하였습니다.
+- https://www.youtube.com/watch?v=y52Av3JxNW4
 
 ## ⚔ 기술스택
+
 <div>
   <img src="https://img.shields.io/badge/JavaScript-F7DF1E?style=flat-square&logo=javascript&logoColor=white"/>
   <img src="https://img.shields.io/badge/React-61DAFB?style=flat-square&logo=react&logoColor=white"/>
@@ -18,6 +20,9 @@
 - 새로운 데이터를 `state`를 이용해서 관리하는 부분 구현
 - 데이터 개수를 나타내는 `Header` 생성
 - 클릭하면 항목별 상태가 `todo`에서 `done`, 혹은 반대로 바뀌면서(토글) css가 적용되도록 구현
+- Context API와 useContext를 사용해서 props drilling 방지
+- useRef를 이용하여 간단하게 onClick 이벤트 처리하기
+- useReducer와 dispatch를 사용해서 파일을 기능별로 분리하고 상태관리 처리하기
 
 ---
 
